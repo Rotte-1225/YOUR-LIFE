@@ -6,11 +6,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0d1117">
-<title>18回目の春に — 青春シミュレーター 完全版</title>
+<title>18回目の春に — 青春シミュレーター [超増量版]</title>
 <style>
   :root {
     --bg-color: #0d1117;
     --card-bg: #161b22;
+    --card-sub: #12161c;
     --text-main: #e6edf3;
     --text-sub: #8b949e;
     --accent: #58a6ff;
@@ -18,6 +19,7 @@
     --border: #30363d;
     --highlight: #f78166;
     --gold: #d29922;
+    --green: #3fb950;
   }
 
   * {
@@ -40,13 +42,13 @@
 
   .container {
     width: 100%;
-    max-width: 620px;
-    padding: 18px 14px calc(115px + env(safe-area-inset-bottom));
+    max-width: 640px;
+    padding: 16px 14px calc(120px + env(safe-area-inset-bottom));
   }
 
   header {
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     border-bottom: 1px solid var(--border);
     padding-bottom: 12px;
   }
@@ -65,7 +67,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  /* ステータスバー（スマホ上部固定） */
+  /* ステータスバー */
   .status-bar {
     display: flex;
     flex-wrap: wrap;
@@ -96,7 +98,7 @@
 
   .tag.friend {
     background: rgba(63, 185, 80, 0.15);
-    color: #3fb950;
+    color: var(--green);
     border-color: rgba(63, 185, 80, 0.3);
   }
 
@@ -112,64 +114,95 @@
     border-color: rgba(210, 153, 34, 0.3);
   }
 
+  /* 年齢ごとの区切りヘッダー */
+  .year-divider {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--text-sub);
+    margin: 14px 0 4px;
+    padding-left: 4px;
+    letter-spacing: 0.08em;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 4px;
+  }
+
   /* タイムライン */
   #timeline {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .log-entry {
     background: var(--card-bg);
     border-left: 3px solid var(--accent);
-    padding: 12px 14px;
+    padding: 11px 14px;
     border-radius: 0 8px 8px 0;
     animation: fadeIn 0.35s ease forwards;
   }
 
+  .log-entry.sub-event {
+    background: var(--card-sub);
+    border-left: 2px solid #484f58;
+    padding: 9px 13px;
+    margin-left: 8px;
+  }
+
   .log-entry.important {
-    border-left-color: var(--highlight);
-    background: linear-gradient(90deg, rgba(247,129,102,0.1) 0%, var(--card-bg) 100%);
+    border-left: 3px solid var(--highlight);
+    background: linear-gradient(90deg, rgba(247,129,102,0.12) 0%, var(--card-bg) 100%);
   }
 
   .log-entry.choice-log {
-    border-left-color: var(--gold);
-    background: linear-gradient(90deg, rgba(210,153,34,0.1) 0%, var(--card-bg) 100%);
+    border-left: 3px solid var(--gold);
+    background: linear-gradient(90deg, rgba(210,153,34,0.12) 0%, var(--card-bg) 100%);
   }
 
   .age-label {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: bold;
     color: var(--accent);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
+  .log-entry.sub-event .age-label { color: var(--text-sub); }
   .log-entry.important .age-label { color: var(--highlight); }
   .log-entry.choice-log .age-label { color: var(--gold); }
 
+  .season-badge {
+    font-size: 0.68rem;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-sub);
+    font-weight: normal;
+  }
+
   .log-text {
-    font-size: 0.94rem;
+    font-size: 0.92rem;
     letter-spacing: 0.03em;
   }
 
   /* 選択肢エリア */
   #choice-area {
-    margin-top: 18px;
+    margin-top: 16px;
     background: #1c2128;
     border: 1px solid var(--gold);
     border-radius: 10px;
-    padding: 16px;
+    padding: 15px;
     animation: fadeIn 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.45);
   }
 
   .choice-title {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--gold);
-    margin-bottom: 12px;
+    margin-bottom: 11px;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: bold;
   }
@@ -177,14 +210,14 @@
   .choice-buttons {
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 8px;
   }
 
   .choice-buttons button {
     text-align: left;
     line-height: 1.45;
-    padding: 13px 15px;
-    font-size: 0.88rem;
+    padding: 12px 14px;
+    font-size: 0.86rem;
     background: #22272e;
     border: 1px solid #444c56;
   }
@@ -238,7 +271,7 @@
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 18px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   .ending-actions {
@@ -262,7 +295,7 @@
     justify-content: center;
     gap: 8px;
     z-index: 20;
-    max-width: 620px;
+    max-width: 640px;
     margin: 0 auto;
   }
 
@@ -320,7 +353,7 @@
 <div class="container">
   <header>
     <h1>18回目の春に</h1>
-    <div class="subtitle">0歳〜18歳・矛盾なき青春ライフシミュレーター [完全版]</div>
+    <div class="subtitle">0歳〜18歳・矛盾なき青春ライフシミュレーター [日常＆四季増量版]</div>
   </header>
 
   <div class="status-bar" id="status-bar"></div>
@@ -330,7 +363,7 @@
 </div>
 
 <div class="controls">
-  <button id="btn-next" class="primary" onclick="nextYear()">次の年へ (＋1歳)</button>
+  <button id="btn-next" class="primary" onclick="nextYear()">次の年へ進む (＋1歳)</button>
   <button id="btn-auto" class="sub-btn" onclick="toggleAuto()">オート</button>
   <button id="btn-reset" class="sub-btn" onclick="initGame()">やり直す</button>
 </div>
@@ -346,37 +379,36 @@ let autoTimer = null;
 
 const FRIEND_NAMES = ["ユウキ", "ハルト", "リク", "ソウタ", "アオイ", "レン", "カイト", "タクミ", "シュン"];
 const HEROINE_NAMES = ["高橋さん", "佐藤さん", "関原さん", "ナノハさん", "ミナミさん", "白石さん", "西園寺さん", "橘さん"];
-const NET_FRIEND_NAMES = ["レオ", "サカモト", "K", "トマト", "ヒカル", "ナイト"];
+const NET_FRIEND_NAMES = ["レオ", "サカモト", "K", "トマト", "ヒカル", "フリーレン", "鶴田"];
 
 function initGame() {
   stopAuto();
   const fName = FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)];
   const hName = HEROINE_NAMES[Math.floor(Math.random() * HEROINE_NAMES.length)];
   const nName = NET_FRIEND_NAMES[Math.floor(Math.random() * NET_FRIEND_NAMES.length)];
-  const initVibe = Math.floor(Math.random() * 5) - 2; // -2 〜 +2
+  const initVibe = Math.floor(Math.random() * 5) - 2;
 
   state = {
     age: -1,
     vibe: initVibe,          // 陽キャ度(+) ⇔ 陰キャ度(-)
     study: 0,                // 学力・知性
-    passion: 0,              // 部活・行動熱量
+    passion: 0,              // 部活・フィジカル熱量
     otaku: 0,                // 創作・ネット・サブカル度
-    snsTrouble: false,       // SNS・人間関係疲れ経験フラグ
     attendance: "normal",    // "normal"(通常), "separate"(別室・マイペース)
     club: "none",            // "none", "sports", "culture", "home"
     friend: {
       name: fName,
-      status: "none"         // "none", "active"(親友), "moved"(転校), "estranged"(疎遠・ケンカ)
+      status: "none"         // "none", "active"(親友), "moved"(転校), "estranged"(疎遠)
     },
     romance: {
       name: hName,
-      status: "none"         // "none", "classmate"(顔見知り), "crush"(片想い・連絡先交換), "dating"(交際中), "ex"(元恋人)
+      status: "none"         // "none", "classmate"(隣席・顔見知り), "crush"(片想い・連絡先交換), "dating"(交際中), "ex"(元恋人)
     },
     netFriend: {
       name: nName,
       met: false
     },
-    highlights: [],          // エンディング振り返り用の重要ログ記録
+    highlights: [],
     flags: new Set(),
     waitingChoice: false,
     finished: false
@@ -397,7 +429,7 @@ function updateStatusBar() {
   const ageStr = state.age < 0 ? "誕生前" : `${state.age}歳(${getGradeString(state.age)})`;
   
   let vibeStr = "バランス型";
-  if (state.vibe >= 5) vibeStr = "学校の中心(陽)";
+  if (state.vibe >= 5) vibeStr = "一軍・中心(陽)";
   else if (state.vibe >= 2) vibeStr = "社交的";
   else if (state.vibe <= -5) vibeStr = "孤高の観察者(陰)";
   else if (state.vibe <= -2) vibeStr = "静かな窓際";
@@ -407,9 +439,9 @@ function updateStatusBar() {
   let html = `<span class="tag">${ageStr}</span>`;
   html += `<span class="tag">${vibeStr}</span>`;
   if (state.age >= 13) html += `<span class="tag">${clubMap[state.club]}</span>`;
-  if (state.study >= 4) html += `<span class="tag">学年上位</span>`;
-  if (state.otaku >= 4) html += `<span class="tag">創作・ネット界隈</span>`;
-  if (state.attendance === "separate") html += `<span class="tag warn">別室・マイペース登校</span>`;
+  if (state.study >= 4) html += `<span class="tag">学力上位</span>`;
+  if (state.otaku >= 4) html += `<span class="tag">創作・ネット没頭</span>`;
+  if (state.attendance === "separate") html += `<span class="tag warn">別室登校</span>`;
 
   if (state.friend.status === "active") {
     html += `<span class="tag friend">親友:${state.friend.name}</span>`;
@@ -445,235 +477,298 @@ function getGradeString(age) {
 
 /**
  * ==========================================================
- * 2. ライフイベントデータベース（全80種以上・矛盾ゼロ設計）
+ * 2. メインイベント（年齢固定の重要イベント）
  * ==========================================================
  */
-const EVENTS = [
-  // ================= 0〜5歳（幼少期） =================
-  { id: "e0_quiet", age: 0, cond: s => s.vibe <= 0,
-    text: s => "地方の静かな街で生まれた。あまり泣かず、窓から揺れる光や天井のモビールをじっと見つめている赤ちゃんだった。",
+const MAIN_EVENTS = [
+  // 0〜5歳
+  { id: "m0_quiet", age: 0, season: "誕生", cond: s => s.vibe <= 0,
+    text: s => "地方の穏やかな街で生まれた。あまり泣かず、天井のモビールや窓の光を目で追う静かな赤ちゃんだった。",
     effect: s => { s.vibe -= 1; }
   },
-  { id: "e0_active", age: 0, cond: s => s.vibe > 0,
-    text: s => "産声が病院の廊下まで響き渡るほど元気な赤ちゃんだった。誰に抱っこされても声を上げて笑った。",
+  { id: "m0_active", age: 0, season: "誕生", cond: s => s.vibe > 0,
+    text: s => "産声が病院の廊下まで響き渡るほど元気な赤ちゃんだった。誰に抱っこされてもケラケラ笑った。",
     effect: s => { s.vibe += 1; }
   },
-  { id: "e1_walk", age: 1, cond: s => true,
-    text: s => "初めて自分の足で歩いた日、嬉しくなって部屋中をよちよちと探検し、そのまま電池が切れたように絨毯の上で眠った。",
+  { id: "m1_walk", age: 1, season: "春", cond: s => true,
+    text: s => "初めて自分の足で数歩あるいた日。嬉しくて部屋中をよちよち歩き回り、そのまま絨毯の上で眠り込んだ。",
     effect: s => {}
   },
-  { id: "e1_first_word", age: 1, cond: s => true,
-    text: s => "窓の外を走る車や猫を指差して、意味のある言葉を少しずつ話し始めた。",
-    effect: s => { s.study += 1; }
-  },
-  { id: "e2_blocks", age: 2, cond: s => s.vibe <= 0,
-    text: s => "積み木やブロックを自分の背丈近くまで規則正しく積み上げるのに夢中になった。職人のような集中力だった。",
+  { id: "m2_blocks", age: 2, season: "秋", cond: s => s.vibe <= 0,
+    text: s => "積み木を自分の背丈近くまで規則正しく並べるのに夢中になった。少しでもズレると最初からやり直した。",
     effect: s => { s.otaku += 1; s.study += 1; }
   },
-  { id: "e2_run", age: 2, cond: s => s.vibe > 0,
-    text: s => "買い物に行くとすぐに親の手を振り切って走り出し、迷子センターのお世話になりかけた。",
+  { id: "m2_run", age: 2, season: "夏", cond: s => s.vibe > 0,
+    text: s => "外に出るとすぐに親の手を振り切って駆け出し、公園の遊具へ一直線に向かっていった。",
     effect: s => { s.passion += 1; }
   },
-  { id: "e3_park_solo", age: 3, cond: s => s.vibe <= 0,
-    text: s => "公園の砂場では、みんなの輪に入るより、一人で黙々と精巧なトンネルやダムを造るのが好きだった。",
+  { id: "m3_sand", age: 3, season: "春", cond: s => s.vibe <= 0,
+    text: s => "公園の砂場では、みんなの輪に入るより、一人で黙々と精巧なトンネルや水路を掘るのが好きだった。",
     effect: s => { s.vibe -= 1; s.otaku += 1; }
   },
-  { id: "e3_park_group", age: 3, cond: s => s.vibe > 0,
-    text: s => "公園に行けば初対面の子の手を引いて滑り台へ駆け回り、帰る頃には服が泥だらけになっていた。",
-    effect: s => { s.vibe += 1; s.passion += 1; }
+  { id: "m3_friends", age: 3, season: "春", cond: s => s.vibe > 0,
+    text: s => "幼稚園の入園初日から周りの子に自分から声をかけ、帰る頃には泥だらけになって笑っていた。",
+    effect: s => { s.vibe += 1; }
   },
-  { id: "e4_game", age: 4, cond: s => true,
-    text: s => "親のスマホやゲーム機の画面に釘付けになり、大人より早く操作を覚えて周囲を驚かせた。",
+  { id: "m4_game", age: 4, season: "冬", cond: s => true,
+    text: s => "親のスマホやゲーム機の画面に釘付けになり、大人より早く操作のコツを掴んで周囲を驚かせた。",
     effect: s => { s.otaku += 1; }
   },
-  { id: "e4_picture_book", age: 4, cond: s => s.vibe <= 0,
-    text: s => "寝る前の絵本の読み聞かせが大好きで、お気に入りのページを暗記するほど何度も読んでもらった。",
-    effect: s => { s.study += 1; }
-  },
-  { id: "e5_play_tree", age: 5, cond: s => s.vibe <= 0,
+  { id: "m5_play_tree", age: 5, season: "秋", cond: s => s.vibe <= 0,
     text: s => "幼稚園のお遊戯会。『木の役』を任され、本番で一歩も動かず役割を全うして先生に褒められた。",
     effect: s => {}
   },
-  { id: "e5_play_hero", age: 5, cond: s => s.vibe > 0,
-    text: s => "幼稚園のお遊戯会で主役級をやりたがり、本番ではアドリブを入れて保護者の笑いを誘った。",
+  { id: "m5_play_hero", age: 5, season: "秋", cond: s => s.vibe > 0,
+    text: s => "幼稚園のお遊戯会でメインの役をやりたがり、本番ではアドリブを入れて会場の笑いを誘った。",
     effect: s => { s.vibe += 1; }
   },
 
-  // ================= 6〜12歳（小学生） =================
-  { id: "e6_enter", age: 6, cond: s => true,
-    text: s => "小学校に入学。自分の体より大きく見えるランドセルを背負い、桜並木の通学路を歩いた。",
+  // 6〜12歳（小学生）
+  { id: "m6_enter", age: 6, season: "春", cond: s => true,
+    text: s => "小学校に入学。真新しいランドセルの革の匂いと、広すぎる教室に少しだけ胸が高鳴った。",
     effect: s => {}
   },
-  { id: "e7_friend_meet", age: 7, important: true, cond: s => s.friend.status === "none",
-    text: s => `小2のクラス替えで隣の席になった「${s.friend.name}」と意気投合した。放課後、ランドセルを放り投げて毎日一緒に遊ぶようになった。`,
+  { id: "m7_friend_meet", age: 7, season: "春", important: true, cond: s => s.friend.status === "none",
+    text: s => `小2のクラス替えで隣の席になった「${s.friend.name}」と意気投合した。放課後、ランドセルを放り投げて毎日遊ぶようになった。`,
     effect: s => { s.friend.status = "active"; s.highlights.push(`7歳：最初の親友・${s.friend.name}と出会う`); }
   },
-  { id: "e8_secret_base", age: 8, cond: s => s.friend.status === "active" && s.vibe >= 0,
-    text: s => `夏休み、${s.friend.name}と一緒に近所の裏山に『秘密基地』を作った。拾ったビー玉や古いマンガが僕たちの宝物だった。`,
-    effect: s => { s.flags.add("secret_base"); s.passion += 1; }
+  { id: "m8_base", age: 8, season: "夏", cond: s => s.friend.status === "active",
+    text: s => `${s.friend.name}と一緒に、近所の雑木林の奥にダンボールで『秘密基地』を作った。あの狭い空間が僕たちの世界の中心だった。`,
+    effect: s => { s.flags.add("secret_base"); }
   },
-  { id: "e8_library", age: 8, cond: s => s.vibe < 0,
-    text: s => "昼休みに校庭でドッジボールをするより、図書室の隅でファンタジー小説や図鑑を読んでいる方が落ち着くことに気づいた。",
-    effect: s => { s.otaku += 1; s.study += 1; }
-  },
-  { id: "e8_pool", age: 8, cond: s => true,
-    text: s => "夏休みの市民プール。塩素の匂いと帰りに食べるアイスの冷たさが、小学生の夏のすべてだった。",
+  { id: "m10_role", age: 10, season: "秋", cond: s => true,
+    text: s => "高学年のクラブ活動と委員会が始まった。クラスの中で「目立つグループ」と「静かなグループ」が少しずつ分かれ始めた。",
     effect: s => {}
   },
-  // 9歳は選択肢あり
-  { id: "e9_after_game", age: 9, cond: s => s.friend.status === "active",
-    text: s => `${s.friend.name}と通信ケーブルやオンラインでゲームを繋ぎ、ボスを倒した瞬間に部屋でハイタッチした。`,
-    effect: s => { s.otaku += 1; }
-  },
-  { id: "e10_test_100", age: 10, cond: s => s.study >= 2,
-    text: s => "小4の算数と理科のテストで連続100点を取った。少しだけクラスで「頭がいいやつ」として見られるようになった。",
-    effect: s => { s.study += 1; }
-  },
-  { id: "e10_relay", age: 10, cond: s => s.passion >= 2,
-    text: s => "運動会のリレー選手に選ばれた。バトンを受け取ってコーナーを抜けたときの歓声が忘れられなかった。",
-    effect: s => { s.vibe += 1; s.passion += 1; }
-  },
-  { id: "e10_rain_day", age: 10, cond: s => s.study < 2 && s.passion < 2,
-    text: s => "雨の日の休み時間、黒板の隅に相合傘や迷路を描いて遊んだ。窓の外の紫陽花が濡れていた。",
-    effect: s => {}
-  },
-  // 11歳：親友の転校分岐 or ケンカ分岐 or 継続
-  { id: "e11_friend_move", age: 11, important: true,
-    cond: s => s.friend.status === "active" && Math.random() < 0.4,
+  { id: "m11_friend_move", age: 11, season: "春", important: true,
+    cond: s => s.friend.status === "active" && Math.random() < 0.42,
     text: s => `親友の${s.friend.name}が、親の転勤で遠くの街へ引っ越すことになった。最後の日、走る車を自転車で追いかけながら「絶対また遊ぼうな！」と叫んだ。`,
-    effect: s => { s.friend.status = "moved"; s.highlights.push(`11歳：親友の${s.friend.name}が遠くの街へ転校`); }
+    effect: s => { s.friend.status = "moved"; s.highlights.push(`11歳：親友の${s.friend.name}が転校してしまう`); }
   },
-  { id: "e11_camp", age: 11, cond: s => s.friend.status === "active",
-    text: s => `林間学校のキャンプファイヤー。火の粉が舞い上がる夜空の下で、${s.friend.name}と消灯時間を過ぎても将来の話をした。`,
+  { id: "m11_camp", age: 11, season: "夏", cond: s => s.friend.status === "active",
+    text: s => `林間学校の夜、${s.friend.name}と消灯時間を過ぎても懐中電灯を照らして怖い話や将来の話をして、先生にこっぴどく怒られた。`,
     effect: s => { s.vibe += 1; }
   },
-  { id: "e12_grad_moved", age: 12, cond: s => s.friend.status === "moved",
-    text: s => `小学校の卒業式。${s.friend.name}のいない体育館で卒業証書を受け取り、子ども時代がひとつ終わったことを感じた。`,
+  { id: "m12_grad_moved", age: 12, season: "春", cond: s => s.friend.status === "moved",
+    text: s => `小学校の卒業式。${s.friend.name}のいない体育館で卒業証書を受け取り、子ども時代がひとつ終わったことを静かに実感した。`,
     effect: s => {}
   },
-  { id: "e12_grad_active", age: 12, cond: s => s.friend.status === "active",
-    text: s => `小学校の卒業式。大きくなった制服を着て、${s.friend.name}と「中学でも同じクラスだといいな」と言いながら校門を出た。`,
+  { id: "m12_grad_active", age: 12, season: "春", cond: s => s.friend.status === "active",
+    text: s => `小学校の卒業式。少しブカブカの制服を着て、${s.friend.name}と「中学でも同じクラスだといいな」と笑いながら校門を出た。`,
     effect: s => {}
   },
 
-  // ================= 13〜15歳（中学生） =================
-  // 13歳：部活選択肢あり + 追加イベント
-  { id: "e13_midterm", age: 13, cond: s => s.study >= 2,
-    text: s => "中学最初の定期テスト。学年順位が貼り出される緊張感の中、上位に自分の名前を見つけてホッと息をついた。",
-    effect: s => { s.study += 1; }
+  // 13〜15歳（中学生）
+  { id: "m14_net_meet", age: 14, season: "深夜", important: true, cond: s => s.otaku >= 3 && !s.netFriend.met,
+    text: s => `深夜、ネットのコミュニティで知り合った「${s.netFriend.name}」たちと初めて通話した。顔も知らないのに、学校の誰よりも話が合った。`,
+    effect: s => { s.netFriend.met = true; s.otaku += 2; s.highlights.push(`14歳：ネットの仲間・${s.netFriend.name}たちと出会う`); }
   },
-  { id: "e13_smartphone", age: 13, cond: s => true,
-    text: s => "自分専用のスマートフォンを手に入れた。夜遅くまで布団の中で画面をスクロールする夜が始まった。",
-    effect: s => { s.otaku += 1; }
-  },
-  // 14歳：中2の選択（SNS・人間関係）＋追加イベント
-  { id: "e14_sports_summer", age: 14, cond: s => s.club === "sports",
-    text: s => "中2の夏休み。陽炎が揺れるグラウンドで声を枯らし、練習帰りにみんなで食べたガリガリ君が世界一美味かった。",
-    effect: s => { s.passion += 2; }
-  },
-  { id: "e14_net_server", age: 14, important: true, cond: s => s.otaku >= 3 && s.vibe <= 0,
-    text: s => `深夜、ネットのコミュニティで知り合った「${s.netFriend.name}」たちとボイスチャットを繋ぐようになった。学校の誰も知らない最高の居場所ができた。`,
-    effect: s => { s.netFriend.met = true; s.otaku += 2; s.highlights.push(`14歳：ネット上の親友・${s.netFriend.name}たちと出会う`); }
-  },
-  { id: "e14_world_building", age: 14, cond: s => s.otaku >= 2,
-    text: s => "授業中、ノートの端っこにオリジナル小説の魔法体系やキャラクター設定を書き溜めるようになった。頭の中には別の大陸が広がっていた。",
-    effect: s => { s.otaku += 2; s.flags.add("novel_writer"); }
-  },
-  { id: "e14_friend_drift", age: 14, important: true,
+  { id: "m14_friend_estranged", age: 14, season: "秋", important: true,
     cond: s => s.friend.status === "active" && s.vibe <= -2 && Math.random() < 0.5,
-    text: s => `クラス替えで${s.friend.name}と別々のクラスになった。廊下ですれ違っても、お互い違うグループにいて、少しずつ視線を逸らすようになっていった。`,
+    text: s => `クラス替えで${s.friend.name}と別々のクラスになった。廊下ですれ違ってもお互い違うグループにいて、少しずつ視線を逸らすようになっていった。`,
     effect: s => { s.friend.status = "estranged"; s.highlights.push(`14歳：${s.friend.name}と少しずつ疎遠になる`); }
   },
-  // 15歳：中3の選択（修学旅行の夜）＋受験・引退イベント
-  { id: "e15_sports_retire", age: 15, important: true, cond: s => s.club === "sports",
-    text: s => "中学最後の夏の大会。延長戦の末に敗退し、部室の床に座り込んでみんなで泣いた。日焼けの跡とともに、ひとつの時代が終わった。",
+  { id: "m15_sports_retire", age: 15, season: "夏", important: true, cond: s => s.club === "sports",
+    text: s => "中学最後の夏の大会。あと1点が届かず敗退し、部室の床に座り込んでみんなで泣いた。日焼けの跡とともに部活生活が幕を閉じた。",
     effect: s => { s.passion += 1; s.highlights.push("15歳：涙の中学最後の部活引退"); }
   },
-  { id: "e15_winter_exam", age: 15, cond: s => s.club !== "sports",
-    text: s => "受験直前の冬。深夜のデスクライトの下、温かいココアを飲みながら過去問の数学と格闘した。志望校には無事に合格した。",
-    effect: s => { s.study += 2; }
+  { id: "m15_exam_pass", age: 15, season: "春", important: true, cond: s => true,
+    text: s => "高校入試の合格発表の日。掲示板に自分の受験番号を見つけた瞬間、張り詰めていた肩の力が一気に抜けた。",
+    effect: s => { s.study += 1; }
   },
 
-  // ================= 16〜18歳（高校生） =================
-  // 16歳：高1の選択（高校でのスタンス）＋出会いイベント
-  { id: "e16_meet_heroine_quiet", age: 16, important: true,
+  // 16〜18歳（高校生）
+  { id: "m16_meet_heroine_quiet", age: 16, season: "春", important: true,
     cond: s => s.romance.status === "none" && s.vibe <= 1 && s.attendance === "normal",
-    text: s => `高校の席替えで隣になった「${s.romance.name}」は、茶髪で明るく成績も優秀な人気者だったけれど、プリントを回すときにいつも気さくに話しかけてくれた。`,
+    text: s => `高校の席替えで隣になった「${s.romance.name}」は、茶髪で明るく成績も優秀な人気者だったけれど、移動教室やプリント配りのときにいつも優しく話しかけてくれた。`,
     effect: s => { s.romance.status = "classmate"; s.highlights.push(`16歳：隣の席の${s.romance.name}と話すようになる`); }
   },
-  { id: "e16_meet_heroine_active", age: 16, important: true,
+  { id: "m16_meet_heroine_active", age: 16, season: "春", important: true,
     cond: s => s.romance.status === "none" && s.vibe >= 2 && s.attendance === "normal",
-    text: s => `高校のクラス打ち上げで同じテーブルになった「${s.romance.name}」と盛り上がり、帰り道にLINEを交換して毎晩やり取りするようになった。`,
-    effect: s => { s.romance.status = "crush"; s.highlights.push(`16歳：${s.romance.name}と連絡先を交換し急接近`); }
+    text: s => `高校のクラス打ち上げで同じテーブルになった「${s.romance.name}」と意気投合し、帰り道にLINEを交換して毎晩やり取りするようになった。`,
+    effect: s => { s.romance.status = "crush"; s.highlights.push(`16歳：${s.romance.name}とLINEを交換し急接近`); }
   },
-  { id: "e16_separate_peace", age: 16, cond: s => s.attendance === "separate",
-    text: s => "騒がしい教室から離れ、静かな別室で先生が用意してくれた課題や簿記・数学の問題を解く時間。誰にも急かされない平穏がそこにあった。",
-    effect: s => { s.study += 2; }
-  },
-  { id: "e16_coding_bot", age: 16, cond: s => s.otaku >= 4,
-    text: s => `深夜、自分でコードを書いてチャットサーバーのBotやミニゲームを開発した。${s.netFriend.met ? s.netFriend.name + "たち" : "ネットの仲間"}が「すげえ！」と遊んでくれたのが誇らしかった。`,
-    effect: s => { s.otaku += 2; s.study += 1; s.flags.add("dev_bot"); }
-  },
-
-  // 17歳：高2の選択（文化祭と青春の岐路）＋派生イベント
-  { id: "e17_test_top", age: 17, cond: s => s.study >= 5,
-    text: s => "高2の期末考査。得意科目でついに学年トップ層のスコアを叩き出し、先生からも一目置かれる存在になった。",
-    effect: s => { s.study += 2; }
-  },
-  { id: "e17_friend_reunion", age: 17, important: true, cond: s => s.friend.status === "moved",
+  { id: "m17_friend_reunion", age: 17, season: "夏", important: true, cond: s => s.friend.status === "moved",
     text: s => `小学生の頃に転校した${s.friend.name}から、SNSのDMで突然「元気か？」と連絡が来た。数年ぶりに通話すると、声は低くなっていたけれど一瞬であの頃に戻れた。`,
     effect: s => { s.friend.status = "active"; s.flags.add("reunion"); s.highlights.push(`17歳：転校した親友・${s.friend.name}とSNSで再会`); }
   },
-  { id: "e17_friend_reconcile", age: 17, important: true, cond: s => s.friend.status === "estranged",
+  { id: "m17_friend_reconcile", age: 17, season: "秋", important: true, cond: s => s.friend.status === "estranged",
     text: s => `雨の日の放課後、下駄箱で偶然${s.friend.name}と二人きりになった。「久しぶりだな」とどちらからともなく笑い、数年間のわだかまりが嘘のように溶けた。`,
     effect: s => { s.friend.status = "active"; s.highlights.push(`17歳：疎遠だった${s.friend.name}と下駄箱で和解`); }
   },
-  { id: "e17_dating_summer", age: 17, important: true, cond: s => s.romance.status === "dating",
-    text: s => `夏休みの花火大会。浴衣姿の${s.romance.name}とはぐれないように初めて手を繋いだ。夜空に咲く大輪の音で、自分の心臓の音が聞こえなければいいと思った。`,
-    effect: s => { s.vibe += 1; }
+  { id: "m17_novel_hit", age: 17, season: "深夜", important: true, cond: s => s.otaku >= 5 && s.romance.status !== "dating",
+    text: s => "カクヨムやGitHubに公開した自分の作品に、見知らぬ誰かから長文の熱い感想と評価が届いた。深夜2時、スマホを握りしめて静かにガッツポーズをした。",
+    effect: s => { s.otaku += 2; s.flags.add("creator_hit"); s.highlights.push("17歳：ネットに公開した自分の作品が評価される"); }
   },
-  { id: "e17_novel_hit", age: 17, important: true, cond: s => s.otaku >= 5 && s.romance.status !== "dating",
-    text: s => "Web小説サイトやGitHubに公開した自分の作品に、見知らぬ読者から長文の熱い感想が届いた。深夜2時、スマホを握りしめて静かにガッツポーズをした。",
-    effect: s => { s.otaku += 2; s.flags.add("creator_hit"); s.highlights.push("17歳：ネットに公開した作品に熱い感想が届く"); }
-  },
-  { id: "e17_sports_last", age: 17, cond: s => s.club === "sports" && s.passion >= 4,
-    text: s => "高校のインターハイ予選。足の痙攣を堪えてコートを走り抜き、ベスト8の壁を突破した瞬間、ベンチ全員と抱き合って吠えた。",
-    effect: s => { s.passion += 2; s.highlights.push("17歳：部活の大会でベスト8突破の快挙"); }
-  },
-
-  // 18歳：高3の選択（最後の夏休み）＋卒業クライマックス（一切の矛盾なく回収）
-  { id: "e18_dating_breakup", age: 18, important: true,
+  { id: "m18_dating_breakup", age: 18, season: "秋", important: true,
     cond: s => s.romance.status === "dating" && s.study >= 6 && Math.random() < 0.3,
     text: s => `受験が近づく秋、お互いの進路と勉強のすれ違いから${s.romance.name}と別れることになった。「今までありがとう」と送り出した冬の帰り道、白い息が滲んだ。`,
     effect: s => { s.romance.status = "ex"; s.highlights.push(`18歳：進路のすれ違いで${s.romance.name}と涙の別れ`); }
   },
-  { id: "e18_grad_dating", age: 18, important: true, cond: s => s.romance.status === "dating",
-    text: s => `卒業式の放課後、誰もいなくなった夕暮れの教室で${s.romance.name}と黒板にメッセージを書いた。春から別々の場所へ行っても、この手は離さないと約束した。`,
+  { id: "m18_grad_dating", age: 18, season: "卒業", important: true, cond: s => s.romance.status === "dating",
+    text: s => `卒業式の放課後、誰もいなくなった夕暮れの教室で${s.romance.name}と黒板にメッセージを書いた。春から別々の道へ進んでも、この手は離さないと約束した。`,
     effect: s => {}
   },
-  { id: "e18_grad_ex", age: 18, important: true, cond: s => s.romance.status === "ex",
+  { id: "m18_grad_ex", age: 18, season: "卒業", important: true, cond: s => s.romance.status === "ex",
     text: s => `卒業式の日、体育館の出口で${s.romance.name}と目が合った。お互いに小さく会釈して微笑んだ瞬間、ほろ苦い記憶がすべて綺麗な思い出に変わった。`,
     effect: s => {}
   },
-  { id: "e18_grad_crush", age: 18, important: true,
+  { id: "m18_grad_crush", age: 18, season: "卒業", important: true,
     cond: s => s.romance.status === "crush" || s.romance.status === "classmate",
-    text: s => `卒業式の日。${s.romance.name}に「同じクラスで楽しかったよ、元気でね！」と声をかけられた。最後まで想いは言えなかったけれど、不思議と後悔はなかった。`,
+    text: s => `卒業式の日。${s.romance.name}に「同じクラスで楽しかったよ、元気でね！」と声をかけられた。最後まで想いは胸に秘めたままだったけれど、不思議と後悔はなかった。`,
     effect: s => {}
   },
-  { id: "e18_grad_friend", age: 18, important: true,
+  { id: "m18_grad_friend", age: 18, season: "卒業", important: true,
     cond: s => s.friend.status === "active" && s.romance.status !== "dating",
     text: s => `卒業式の帰り道、${s.friend.name}と地元のマクドナルドでポテトをシェアしながら、「大人になっても絶対また集まろうぜ」と笑い合った。`,
     effect: s => {}
   },
-  { id: "e18_grad_quiet", age: 18, important: true, cond: s => true,
-    text: s => "高校生活の最後の日。制服のボタンも派手な打ち上げもなかったけれど、イヤホンから流れるお気に入りの曲とともに、晴れやかな気持ちで校門を出た。",
+  { id: "m18_grad_quiet", age: 18, season: "卒業", important: true, cond: s => true,
+    text: s => "高校生活の最後の日。派手な打ち上げはなかったけれど、イヤホンから流れるお気に入りのイントロとともに、晴れやかな気持ちで桜並木の校門を出た。",
     effect: s => {}
   }
 ];
 
 /**
  * ==========================================================
- * 3. 人生の分岐点（選択肢イベント・全7回）
+ * 3. 日常・季節のサブイベントプール（年間複数発生するディテール群）
+ * ==========================================================
+ * minAge / maxAge の範囲内で、条件(cond)に合致するものが毎年2〜3個追加で発生します。
+ */
+const SUB_EVENTS = [
+  // --- 幼少期（1〜5歳） ---
+  { id: "s_kid_cat", minAge: 1, maxAge: 3, season: "昼下がり", cond: s => true,
+    text: s => "窓辺で日向ぼっこをしながら、外を通り過ぎる野良猫をじっと目で追っていた。" },
+  { id: "s_kid_rain", minAge: 2, maxAge: 5, season: "梅雨", cond: s => true,
+    text: s => "お気に入りの黄色い長靴を履いて、雨上がりの水たまりにわざと飛び込んで親に叱られた。" },
+  { id: "s_kid_Anime", minAge: 3, maxAge: 5, season: "日曜朝", cond: s => true,
+    text: s => "日曜日の朝は誰よりも早く目を覚まし、テレビの前にかじりついてアニメのオープニングを口ずさんだ。" },
+  { id: "s_kid_shy", minAge: 3, maxAge: 5, season: "買い物", cond: s => s.vibe <= 0,
+    text: s => "スーパーで近所の人に話しかけられると、親の足の後ろにサッと隠れて様子を伺った。" },
+  { id: "s_kid_snow", minAge: 4, maxAge: 5, season: "冬", cond: s => true,
+    text: s => "冬の寒い朝、自分の吐く息が白くなるのが面白くて、機関車みたいに何度も息を吐きながら歩いた。" },
+
+  // --- 小学生（6〜12歳） ---
+  { id: "s_el_puddle", minAge: 6, maxAge: 9, season: "帰り道", cond: s => true,
+    text: s => "下校途中、「白い線の上だけを歩いて帰る」という自分だけのルールを作って真剣に歩いた。" },
+  { id: "s_el_lunch", minAge: 6, maxAge: 12, season: "昼休み", cond: s => true,
+    text: s => "給食で人気の揚げパンやデザートが余った日、クラスのじゃんけん大会に全力で参戦した。" },
+  { id: "s_el_recorder", minAge: 8, maxAge: 10, season: "音楽", cond: s => true,
+    text: s => "音楽の授業でリコーダーのテストがあり、緊張で指が震えて変な裏返った音が響いた。" },
+  { id: "s_el_pool", minAge: 6, maxAge: 11, season: "夏", cond: s => true,
+    text: s => "プールの授業のあとの5時間目。塩素の匂いと心地よい疲労感で、先生の声が遠くに聞こえるほど眠かった。" },
+  { id: "s_el_typhoon", minAge: 7, maxAge: 12, season: "秋", cond: s => true,
+    text: s => "台風が近づく朝、暴風警報が出て休校にならないかとテレビの気象情報を祈るように見つめた。" },
+  { id: "s_el_friend_ds", minAge: 7, maxAge: 11, season: "放課後", cond: s => s.friend.status === "active",
+    text: s => `${s.friend.name}の家の扇風機の前で、冷たい麦茶をもらいながら夕方までずっとゲームをした。` },
+  { id: "s_el_library_rain", minAge: 8, maxAge: 12, season: "雨の日", cond: s => s.vibe <= 0,
+    text: s => "雨の日の昼休み、静かな図書室で青い鳥文庫やファンタジー小説のページをめくる時間が一番落ち着く。" },
+  { id: "s_el_drill", minAge: 9, maxAge: 12, season: "夏休み", cond: s => s.study <= 2,
+    text: s => "8月30日の夜、手つかずの読書感想文と自由研究を前にして、半泣きになりながら机に向かった。" },
+  { id: "s_el_homework_early", minAge: 9, maxAge: 12, season: "夏休み", cond: s => s.study >= 3,
+    text: s => "夏休みの宿題を7月中にすべて終わらせ、8月はクーラーの効いた部屋で悠々と自分の好きな本やゲームを楽しんだ。" },
+  { id: "s_el_calligraphy", minAge: 8, maxAge: 11, season: "放課後", cond: s => true,
+    text: s => "習字の時間に墨汁が服に跳ねてしまい、落ちない黒いシミを見て少しだけ落ち込んだ。" },
+  { id: "s_el_stars", minAge: 10, maxAge: 12, season: "夜", cond: s => true,
+    text: s => "塾や習い事の帰り道、冬の澄んだ夜空を見上げてオリオン座の三つ星を探しながら自転車を漕いだ。" },
+
+  // --- 中学生（13〜15歳） ---
+  { id: "s_jh_uniform", minAge: 13, maxAge: 13, season: "春", cond: s => true,
+    text: s => "まだ少し大きすぎる中学校の制服に袖を通し、先輩たちの敬語や校則の厳しさに緊張した。" },
+  { id: "s_jh_test_rank", minAge: 13, maxAge: 15, season: "定期考査", cond: s => s.study >= 3,
+    text: s => "定期テストの学年順位が返却された。数学と理科で学年上位に入り、小さくガッツポーズをした。" },
+  { id: "s_jh_test_night", minAge: 13, maxAge: 15, season: "テスト前夜", cond: s => s.study < 3,
+    text: s => "テスト前日の深夜、急に部屋の片付けや漫画の読み返しがしたくなり、気づけば朝4時になっていた。" },
+  { id: "s_jh_sleep_fake", minAge: 13, maxAge: 15, season: "休み時間", cond: s => s.vibe <= -1,
+    text: s => "休み時間、周りの陽キャグループが騒ぐ教室の隅で、机に突っ伏して「寝たふり」でやり過ごすスキルが身についた。" },
+  { id: "s_jh_karaoke", minAge: 13, maxAge: 15, season: "休日", cond: s => s.vibe >= 2,
+    text: s => "テスト最終日、クラスの友達と初めてのカラオケに行き、ドリンクバーで変な色のミックスジュースを作って笑った。" },
+  { id: "s_jh_sports_water", minAge: 13, maxAge: 15, season: "放課後", cond: s => s.club === "sports",
+    text: s => "ハードな外周走のあと、水道に駆け寄って頭から水をかぶり、蛇口から直接飲んだ水が驚くほど甘かった。" },
+  { id: "s_jh_culture_room", minAge: 13, maxAge: 15, season: "放課後", cond: s => s.club === "culture",
+    text: s => "放課後の文化部の部室。西日が差し込む静かな部屋で、先輩や同級生とマニアックな趣味の話をしながら作業した。" },
+  { id: "s_jh_home_rush", minAge: 13, maxAge: 15, season: "放課後", cond: s => s.club === "home",
+    text: s => "帰りのホームルームが終わった瞬間、運動部が着替えるのを尻目に誰よりも早く校門を抜けて帰宅した。" },
+  { id: "s_jh_net_late", minAge: 13, maxAge: 15, season: "深夜2時", cond: s => s.otaku >= 2,
+    text: s => "親が寝静まった深夜2時、スマホの画面の明るさを最低にして、お気に入りのWeb小説や動画を朝まで漁った。" },
+  { id: "s_jh_chorus", minAge: 13, maxAge: 15, season: "秋", cond: s => true,
+    text: s => "合唱コンクールの練習期間。男子が真面目に歌わないことでクラスが少しピリピリする、あの独特の空気が流れた。" },
+  { id: "s_jh_marathon", minAge: 13, maxAge: 15, season: "冬", cond: s => true,
+    text: s => "冬の体育の持久走。冷たい空気で喉の奥が血の味がする感覚に耐えながら、ただひたすら前の人の背中を追った。" },
+
+  // --- 高校生（16〜18歳） ---
+  // 【恋愛・ヒロイン関連（矛盾しないようステータス別に分岐）】
+  { id: "s_hi_heroine_print", minAge: 16, maxAge: 18, season: "授業中",
+    cond: s => s.romance.status === "classmate" && s.attendance === "normal",
+    text: s => `隣の席の${s.romance.name}からプリントを受け取るとき、指先がほんの少し触れて「ありがとう」と微笑まれた。それだけで1日が少し明るくなった。` },
+  { id: "s_hi_heroine_move", minAge: 16, maxAge: 18, season: "移動教室",
+    cond: s => s.romance.status === "classmate" && s.attendance === "normal",
+    text: s => `移動教室の廊下で偶然${s.romance.name}と歩くペースが重なり、「次の授業だるいね」と二言三言だけ言葉を交わした。` },
+  { id: "s_hi_heroine_line", minAge: 16, maxAge: 18, season: "夜",
+    cond: s => s.romance.status === "crush",
+    text: s => `${s.romance.name}に業務連絡を装ってLINEを送った。既読がつくまでの数分間、スマホを置いては手に取るのを繰り返した。` },
+  { id: "s_hi_heroine_study", minAge: 16, maxAge: 18, season: "テスト前",
+    cond: s => s.romance.status === "crush" && s.study >= 3,
+    text: s => `テスト前、${s.romance.name}に「ここ教えて！」と数学の問題を聞かれた。内心めちゃくちゃ緊張しながら、平静を装って解き方を解説した。` },
+  { id: "s_hi_dating_home", minAge: 16, maxAge: 18, season: "放課後",
+    cond: s => s.romance.status === "dating",
+    text: s => `放課後、駅の近くのカフェで${s.romance.name}と向かい合って新作のフラペチーノを飲んだ。他愛のない話で時間が溶けていった。` },
+  { id: "s_hi_dating_call", minAge: 16, maxAge: 18, season: "深夜",
+    cond: s => s.romance.status === "dating",
+    text: s => `深夜、${s.romance.name}と寝落ち通話を繋いだ。電話の向こうから聞こえる小さな寝息を聞きながら、自分もゆっくり目を閉じた。` },
+
+  // 【別室・マイペース登校ルート専用】
+  { id: "s_hi_sep_room", minAge: 16, maxAge: 18, season: "午前",
+    cond: s => s.attendance === "separate",
+    text: s => "静かな別室の机で、先生が用意してくれたプリントや簿記の仕訳問題を自分のペースで黙々と解き進めた。" },
+  { id: "s_hi_sep_sky", minAge: 16, maxAge: 18, season: "昼下がり",
+    cond: s => s.attendance === "separate",
+    text: s => "別室の窓から、体育の授業でグラウンドを走る生徒たちを遠くに眺めながら、温かいお茶を一口飲んだ。穏やかな時間が流れていた。" },
+  { id: "s_hi_sep_teacher", minAge: 16, maxAge: 18, season: "放課後",
+    cond: s => s.attendance === "separate",
+    text: s => "担当の先生が「今日もよく頑張ったね、出席日数も順調だよ」と声をかけてくれた。自分の歩幅でいいんだと安心できた。" },
+
+  // 【ネット・創作・プログラミング界隈専用】
+  { id: "s_hi_discord_admin", minAge: 16, maxAge: 18, season: "深夜",
+    cond: s => s.otaku >= 4,
+    text: s => `自分が管理するDiscordサーバーで、${s.netFriend.met ? s.netFriend.name + "たち" : "メンバーたち"}と深夜のゲーム大会やイベントを開催して大いに盛り上がった。` },
+  { id: "s_hi_bot_debug", minAge: 16, maxAge: 18, season: "深夜1時",
+    cond: s => s.otaku >= 4,
+    text: s => "VS Codeを開き、Pythonで作っている自作Botのエラーと格闘した。ついにバグが直って正常に動いた瞬間、静かな部屋で一人歓喜した。" },
+  { id: "s_hi_novel_write", minAge: 16, maxAge: 18, season: "放課後",
+    cond: s => s.otaku >= 3,
+    text: s => "オリジナルWeb小説の最新話を書き上げ、魔法陣や相（フェイズ）の設定を緻密に練り直した。頭の中の世界が形になるのが楽しかった。" },
+  { id: "s_hi_gacha", minAge: 16, maxAge: 18, season: "アップデート日",
+    cond: s => s.otaku >= 2,
+    text: s => "ずっと石を貯めて待っていた推しキャラのガチャ更新日。画面が金色に光って神引きした瞬間、思わずスクショを連写した。" },
+
+  // 【学問・トレーニング・日常】
+  { id: "s_hi_math_deep", minAge: 16, maxAge: 18, season: "夜",
+    cond: s => s.study >= 4,
+    text: s => "高校の範囲を超えた大学数学（測度論や微積分）や難関大の過去問に挑み、美しい数式の証明が繋がった瞬間に鳥肌が立った。" },
+  { id: "s_hi_boki", minAge: 16, maxAge: 18, season: "授業",
+    cond: s => s.study >= 2,
+    text: s => "電卓をリズミカルに叩きながら貸借対照表の合計金額を算出した。借方と貸方がピタリと一致した瞬間の爽快感がたまらない。" },
+  { id: "s_hi_workout", minAge: 16, maxAge: 18, season: "夕方",
+    cond: s => true,
+    text: s => "気分転換に家の周りを全力で走ったり、部屋で腹筋やストレッチをこなしたりして、心地よい汗を流した。" },
+  { id: "s_hi_mac_friend", minAge: 16, maxAge: 18, season: "放課後",
+    cond: s => s.friend.status === "active",
+    text: s => `放課後、${s.friend.name}とマックに寄ってLサイズのポテトを頼み、進路のことやくだらないネタで2時間近く話し込んだ。` },
+  { id: "s_hi_bread_war", minAge: 16, maxAge: 18, season: "昼休み",
+    cond: s => s.attendance === "normal" && s.vibe >= 0,
+    text: s => "4時間目の終了チャイムと同時に購買へダッシュし、残り1個だった人気の総菜パンをギリギリで勝ち取った。" },
+  { id: "s_hi_earphone", minAge: 16, maxAge: 18, season: "帰り道",
+    cond: s => s.vibe <= 1,
+    text: s => "夕暮れの通学路。イヤホンから流れるお気に入りの曲を聴きながら、赤く染まる街並みを一人でゆっくり歩いて帰った。" },
+  { id: "s_hi_winter_combini", minAge: 16, maxAge: 18, season: "冬",
+    cond: s => true,
+    text: s => "凍えるような冬の帰り道、コンビニで買ったほかほかの肉まんを頬張りながら、白い息を吐いて家路についた。" }
+];
+
+/**
+ * ==========================================================
+ * 4. 人生の分岐点（選択肢イベント・全7回）
  * ==========================================================
  */
 const CHOICES = {
@@ -684,21 +779,21 @@ const CHOICES = {
         label: "校庭や公園に飛び出して、暗くなるまで友達と走り回る",
         action: s => {
           s.vibe += 1; s.passion += 1;
-          addLog(9, "放課後のチャイムと同時に校庭へ飛び出し、夕焼けのチャイムが鳴るまで鬼ごっこやサッカーで駆け回った。", false, true);
+          addLog(9, "放課後のチャイムと同時に校庭へ飛び出し、夕焼けのチャイムが鳴るまで鬼ごっこやサッカーで駆け回った。", "放課後", false, true);
         }
       },
       {
         label: "家に集まって、ゲームやカードバトルに熱中する",
         action: s => {
           s.otaku += 1;
-          addLog(9, "放課後は友達の家に集まり、ゲームの攻略やレアカードの見せ合いで毎日大盛り上がりした。", false, true);
+          addLog(9, "放課後は友達の家に集まり、ゲームの攻略やレアカードの見せ合いで毎日大盛り上がりした。", "放課後", false, true);
         }
       },
       {
-        label: "図書室や自分の部屋で、本を読んだり自由帳に絵や設定を描く",
+        label: "図書室や自分の部屋で、本を読んだり自由帳に世界の設定を描く",
         action: s => {
           s.vibe -= 1; s.otaku += 1; s.study += 1;
-          addLog(9, "放課後は静かな場所で本を読んだり、自由帳に自分だけの迷路や物語を描いたりする時間が何より好きだった。", false, true);
+          addLog(9, "放課後は静かな場所で本を読んだり、自由帳に自分だけの迷路や物語の設定を描いたりする時間が何より好きだった。", "放課後", false, true);
         }
       }
     ]
@@ -710,47 +805,47 @@ const CHOICES = {
         label: "運動部に入って、仲間と汗を流す青春を送る",
         action: s => {
           s.club = "sports"; s.passion += 2; s.vibe += 1;
-          addLog(13, "中学校に入学。迷わず運動部に入部し、放課後は毎日ユニフォームを泥だらけにして声を張り上げた。", false, true);
+          addLog(13, "中学校に入学。迷わず運動部に入部し、放課後は毎日ユニフォームを泥だらけにして声を張り上げた。", "春", false, true);
         }
       },
       {
         label: "文化部（パソコン・美術・吹奏楽など）で自分の特技を磨く",
         action: s => {
           s.club = "culture"; s.otaku += 1; s.study += 1;
-          addLog(13, "中学校に入学。落ち着いた雰囲気の文化部に入り、放課後は部室で自分の好きなことに没頭し始めた。", false, true);
+          addLog(13, "中学校に入学。落ち着いた雰囲気の文化部に入り、放課後は部室で自分の好きなことに没頭し始めた。", "春", false, true);
         }
       },
       {
         label: "帰宅部を選んで、放課後のすべての時間を自分の自由にする",
         action: s => {
           s.club = "home"; s.otaku += 2; s.vibe -= 1;
-          addLog(13, "中学校に入学。縛られるのが嫌で帰宅部を選び、放課後の時間をすべてネットや趣味に捧げることにした。", false, true);
+          addLog(13, "中学校に入学。縛られるのが嫌で帰宅部を選び、放課後の時間をすべてネットや趣味に捧げることにした。", "春", false, true);
         }
       }
     ]
   },
   14: {
-    title: "【14歳・中2の夜】クラスのLINEグループで誰かの悪口や微妙な空気が流れている…。",
+    title: "【14歳・中2の夜】クラスのSNSグループで誰かの悪口や微妙な空気が流れている…。",
     options: [
       {
         label: "波風を立てないよう、当たり障りのないスタンプで合わせておく",
         action: s => {
           s.vibe += 1;
-          addLog(14, "クラスのグループチャットの空気を読み、うまくスタンプで流してスクールカーストの波を乗りこなした。", false, true);
+          addLog(14, "クラスのグループチャットの空気を読み、うまくスタンプで流してスクールカーストの波を乗りこなした。", "夜", false, true);
         }
       },
       {
-        label: "通知をオフにしてミュート。リアルの人間関係よりネットや趣味の世界に潜る",
+        label: "通知をオフにしてミュート。リアルの人間関係よりネットや創作の世界に潜る",
         action: s => {
-          s.vibe -= 2; s.otaku += 2; s.snsTrouble = true;
-          addLog(14, "クラスのSNSの空気に疲れ果てて通知を切った。代わりに深夜のネットコミュニティや創作の世界が自分の本当の居場所になった。", false, true);
+          s.vibe -= 2; s.otaku += 2;
+          addLog(14, "クラスのSNSの空気に疲れ果てて通知を切った。代わりに深夜のネットコミュニティや創作の世界が自分の本当の居場所になった。", "深夜", false, true);
         }
       },
       {
-        label: "そういう空気から距離を置き、勉強や部活にストイックに打ち込む",
+        label: "そういう空気から距離を置き、勉強や自分のトレーニングに打ち込む",
         action: s => {
           s.study += 2; s.passion += 1;
-          addLog(14, "スマホのくだらない言い争いから距離を置き、テスト勉強や自分のトレーニングに黙々と時間を投資した。", false, true);
+          addLog(14, "スマホのくだらない言い争いから距離を置き、テスト勉強や自分のトレーニングに黙々と時間を投資した。", "夜", false, true);
         }
       }
     ]
@@ -762,7 +857,7 @@ const CHOICES = {
         label: "先生の巡回を警戒しながら、恋バナやトランプで朝まで盛り上がる！",
         action: s => {
           s.vibe += 2;
-          addLog(15, "修学旅行の夜。廊下の足音に息を潜めながら、まくら投げや好きな人の話で深夜まで笑い転げた。", false, true);
+          addLog(15, "修学旅行の夜。廊下の足音に息を潜めながら、まくら投げや好きな人の話で深夜まで笑い転げた。", "修学旅行", false, true);
         }
       },
       {
@@ -770,14 +865,14 @@ const CHOICES = {
         action: s => {
           s.study += 1;
           const target = s.friend.status === "active" ? s.friend.name : "同じ班の友達";
-          addLog(15, `修学旅行の深夜、旅館のロビーの自販機前で${target}と冷たいジュースを飲みながら、高校に行ったらどうなるかを静かに語り合った。`, false, true);
+          addLog(15, `修学旅行の深夜、旅館のロビーの自販機前で${target}と冷たいジュースを飲みながら、高校に行ったらどうなるかを静かに語り合った。`, "修学旅行", false, true);
         }
       },
       {
         label: "布団を頭まで被り、イヤホンで好きな曲を聴きながら自分の世界に浸る",
         action: s => {
           s.vibe -= 1; s.otaku += 1;
-          addLog(15, "修学旅行の騒がしい部屋の隅で、イヤホンから流れるお気に入りの曲に耳を澄ませながら、旅先の夜の空気を一人で味わった。", false, true);
+          addLog(15, "修学旅行の騒がしい部屋の隅で、イヤホンから流れるお気に入りの曲に耳を澄ませながら、旅先の夜の空気を一人で味わった。", "修学旅行", false, true);
         }
       }
     ]
@@ -789,22 +884,22 @@ const CHOICES = {
         label: "クラスの中心グループに入り、行事も放課後も全力で陽キャ青春を謳歌する！",
         action: s => {
           s.vibe += 3; s.attendance = "normal";
-          addLog(16, "高校に進学。最初から積極的に周りに話しかけ、放課後にカラオケやカフェに寄り道する華やかなグループの一員になった。", false, true);
+          addLog(16, "高校に進学。最初から積極的に周りに話しかけ、放課後にカラオケやカフェに寄り道する華やかなグループの一員になった。", "春", false, true);
         }
       },
       {
-        label: "教室では目立たない窓際族として過ごし、裏で創作・プログラミング・勉強を極める",
+        label: "教室では静かな窓際族として過ごし、放課後は創作・Bot開発・数学の探求に没頭する",
         action: s => {
           s.vibe -= 2; s.otaku += 2; s.study += 1; s.club = "home"; s.attendance = "normal";
-          addLog(16, "高校に進学。教室では省エネで静かに過ごし、放課後は自分の部屋で小説執筆やBot開発、数学の探求に没頭する二重生活を選んだ。", false, true);
+          addLog(16, "高校に進学。教室では省エネで穏やかに過ごし、帰宅後は自分の部屋で小説執筆やサーバー運営、勉強に没頭する二重生活を選んだ。", "春", false, true);
         }
       },
       {
-        label: "教室の大人数の空気に無理をせず、別室登校や自分のペースで賢く単位を取る",
+        label: "教室の大人数の空気に無理をせず、別室登校で先生のサポートを受けながら自分のペースで学ぶ",
         action: s => {
           s.attendance = "separate"; s.vibe -= 1; s.study += 2; s.club = "home";
           s.highlights.push("16歳：別室で自分のペースを守る高校生活を選択");
-          addLog(16, "高校に進学。無理に教室の空気に合わせるのをやめ、先生たちのサポートを受けながら別室で自分のペースで課題と出席を満たす道を選んだ。", false, true);
+          addLog(16, "高校に進学。無理に大人数の教室に合わせるのをやめ、先生たちの温かいサポートを受けながら別室で自分のペースで課題と出席を満たす道を選んだ。", "春", false, true);
         }
       }
     ]
@@ -813,31 +908,31 @@ const CHOICES = {
     title: "【17歳・高2の秋】文化祭と青春のピーク。今、一番エネルギーを注ぎたいものは？",
     options: [
       {
-        label: "気になるあの人を誘って、文化祭の買い出しや後夜祭で距離を縮める！",
+        label: "気になるあの人を誘って、文化祭の買い出しや後夜祭で一気に距離を縮める！",
         action: s => {
           if (s.romance.status === "none") s.romance.status = "classmate";
           if (s.romance.status === "classmate") {
             s.romance.status = "crush";
-            addLog(17, `文化祭の準備期間、思い切って${s.romance.name}と一緒に買い出し係に立候補した。二人きりの帰り道、一気に距離が縮まった。`, true, true);
+            addLog(17, `文化祭の準備期間、思い切って${s.romance.name}と一緒に買い出し係に立候補した。二人きりでホームセンターを回り、LINEも交換して一気に距離が縮まった。`, "文化祭", true, true);
           } else if (s.romance.status === "crush") {
             s.romance.status = "dating";
             s.highlights.push(`17歳：文化祭の後夜祭で${s.romance.name}と恋人になる`);
-            addLog(17, `文化祭の後夜祭のあと、夕暮れの校舎裏で${s.romance.name}に想いを伝えた。真っ赤になりながら頷いてくれて、僕たちは恋人になった。`, true, true);
+            addLog(17, `文化祭の後夜祭のあと、夕暮れの校舎裏で${s.romance.name}に想いを伝えた。少し驚いた顔の後、笑顔で頷いてくれて僕たちは恋人になった。`, "文化祭", true, true);
           }
         }
       },
       {
-        label: "ネットのサーバー運営や創作活動・プログラミングに全力を注ぎ込む",
+        label: "ネットのサーバー運営やWeb小説執筆・プログラミング開発に全力を注ぎ込む",
         action: s => {
           s.otaku += 3;
-          addLog(17, "文化祭の喧騒をよそに、自分が運営するオンラインコミュニティの大型イベント企画や長編作品の執筆に情熱のすべてを注ぎ込んだ。", false, true);
+          addLog(17, "文化祭の喧騒をよそに、自分が主宰するオンラインコミュニティの大型企画や、長編Web小説の執筆・システム開発に情熱のすべてを注ぎ込んだ。", "秋", false, true);
         }
       },
       {
-        label: "部活の大会や難関科目・資格（簿記や数学）の勉強にストイックに挑む",
+        label: "部活の大会や難関科目・資格（簿記や高等数学）の勉強にストイックに挑む",
         action: s => {
           s.study += 2; s.passion += 2;
-          addLog(17, "周りが浮足立つ秋、自分の目標だった大会や資格試験・高難度の数学問題集にストイックに向き合い、確かな実力を手に入れた。", false, true);
+          addLog(17, "周りが浮足立つ秋、自分の目標だった大会や資格試験・高難度の数学問題にストイックに向き合い、誰にも負けない実力を手に入れた。", "秋", false, true);
         }
       }
     ]
@@ -846,11 +941,11 @@ const CHOICES = {
     title: "【18歳・高3の最後の夏】18年間の集大成となる夏休み。どう過ごす？",
     options: [
       {
-        label: "クーラーの効いた部屋や図書館に籠もり、大学受験・資格勉強に限界まで挑む",
+        label: "静かな部屋や図書館に籠もり、大学受験や専門知識の勉強に限界まで挑む",
         action: s => {
           s.study += 3;
           s.highlights.push("18歳：最後の夏休みを勉強と知の探求に捧げる");
-          addLog(18, "高3の夏。積み上げた参考書とノートを相棒に、誰よりも深く知識の海へ潜った。解けなかった難問が解ける快感がたまらなかった。", false, true);
+          addLog(18, "高3の夏。積み上げた参考書とノートを相棒に、誰よりも深く知識の海へ潜った。解けなかった難問が解ける快感がたまらなかった。", "夏休み", false, true);
         }
       },
       {
@@ -861,7 +956,7 @@ const CHOICES = {
           if (s.romance.status === "dating") who = s.romance.name;
           else if (s.friend.status === "active") who = s.friend.name;
           else if (s.netFriend.met) who = `ネット仲間の${s.netFriend.name}たち`;
-          addLog(18, `高3の夏。${who}と一緒に海へ行ったり深夜まで語り合ったりして、10代最後の眩しすぎる夏休みを焼き付けた。`, false, true);
+          addLog(18, `高3の夏。${who}と一緒に海を見に行ったり深夜まで語り合ったりして、10代最後の眩しすぎる夏休みを心に焼き付けた。`, "夏休み", false, true);
         }
       },
       {
@@ -869,7 +964,7 @@ const CHOICES = {
         action: s => {
           s.otaku += 3;
           s.highlights.push("18歳：10代の集大成となる作品をネットに公開");
-          addLog(18, "高3の夏。これまでの自分のアイデアと技術をすべて詰め込んだ作品を完成させ、ネットの海へ公開した。確かな手応えがあった。", false, true);
+          addLog(18, "高3の夏。これまでの自分のアイデアと技術をすべて詰め込んだ作品を完成させ、ネットの海へ公開した。確かな手応えがあった。", "夏休み", false, true);
         }
       }
     ]
@@ -878,14 +973,16 @@ const CHOICES = {
 
 /**
  * ==========================================================
- * 4. 進行エンジン
+ * 5. 進行エンジン（1年に複数の出来事を生成するロジック）
  * ==========================================================
  */
 function nextYear() {
   if (state.waitingChoice || state.finished) return;
   state.age += 1;
 
-  // 選択肢が発生する年齢かチェック
+  addYearDivider(state.age);
+
+  // 選択肢がある年齢ならまず選択肢を表示
   if (CHOICES[state.age] && !state.flags.has(`choice_${state.age}`)) {
     state.flags.add(`choice_${state.age}`);
     showChoice(CHOICES[state.age]);
@@ -893,7 +990,7 @@ function nextYear() {
     return;
   }
 
-  runEventsForCurrentAge();
+  runMultipleEventsForAge(state.age);
   updateStatusBar();
 
   if (state.age >= 18) {
@@ -901,45 +998,68 @@ function nextYear() {
   }
 }
 
-function runEventsForCurrentAge() {
-  let candidates = EVENTS.filter(ev => ev.age === state.age && !state.flags.has(ev.id) && ev.cond(state));
-  let selectedEvent = null;
+/**
+ * その年齢の「メインイベント1つ」＋「季節・日常のサブイベント1〜2つ」をまとめて出力
+ */
+function runMultipleEventsForAge(age) {
+  // 1. 年齢前半のサブイベント（小学生以上は高確率で1つ挟む）
+  if (age >= 2 && age <= 17) {
+    pickAndRunSubEvent(age);
+  }
 
+  // 2. その年齢のメインイベント
+  let mainCandidates = MAIN_EVENTS.filter(ev => ev.age === age && !state.flags.has(ev.id) && ev.cond(state));
+  if (mainCandidates.length > 0) {
+    const importantOnes = mainCandidates.filter(e => e.important);
+    const pool = (importantOnes.length > 0 && Math.random() < 0.85) ? importantOnes : mainCandidates;
+    const selected = pool[Math.floor(Math.random() * pool.length)];
+    state.flags.add(selected.id);
+    const txt = selected.text(state);
+    selected.effect(state);
+    addLog(age, txt, selected.season || "出来事", selected.important, false, false);
+  }
+
+  // 3. 年齢後半のサブイベント（中高生はさらに1〜2個追加して1年の密度を高める）
+  const extraCount = age >= 13 ? 2 : (age >= 6 ? 1 : 0);
+  for (let i = 0; i < extraCount; i++) {
+    pickAndRunSubEvent(age);
+  }
+}
+
+function pickAndRunSubEvent(age) {
+  const candidates = SUB_EVENTS.filter(ev =>
+    age >= ev.minAge &&
+    age <= ev.maxAge &&
+    !state.flags.has(ev.id) &&
+    ev.cond(state)
+  );
   if (candidates.length > 0) {
-    const importantOnes = candidates.filter(e => e.important);
-    const pool = (importantOnes.length > 0 && Math.random() < 0.8) ? importantOnes : candidates;
-    selectedEvent = pool[Math.floor(Math.random() * pool.length)];
-  }
-
-  if (selectedEvent) {
-    state.flags.add(selectedEvent.id);
-    const text = selectedEvent.text(state);
-    selectedEvent.effect(state);
-    addLog(state.age, text, selectedEvent.important, false);
-  } else {
-    addLog(state.age, generateFallbackText(state), false, false);
+    const ev = candidates[Math.floor(Math.random() * candidates.length)];
+    state.flags.add(ev.id);
+    addLog(age, ev.text(state), ev.season || "日常", false, false, true);
   }
 }
 
-function generateFallbackText(s) {
-  if (s.age <= 5) return "季節ごとに少しずつ背が伸び、窓の外の世界にある言葉や色を覚えていった。";
-  if (s.age <= 12) return "夕方の防災無線のメロディとランドセルの揺れる音の中で、穏やかな小学生の1年が過ぎていった。";
-  if (s.attendance === "separate") return "自分のペースで登校し、静かな部屋でページをめくりながら心穏やかな1年を過ごした。";
-  if (s.vibe >= 2) return "休み時間の賑やかな笑い声や放課後の寄り道に囲まれて、あっという間に季節が巡った。";
-  return "教室の窓から差し込む日差しと、深夜の静かな部屋の空気の中で、僕なりの1年が過ぎていった。";
+function addYearDivider(age) {
+  const timeline = document.getElementById("timeline");
+  const div = document.createElement("div");
+  div.className = "year-divider";
+  div.textContent = `▼ ${age}歳 （${getGradeString(age)}）`;
+  timeline.appendChild(div);
 }
 
-function addLog(age, text, isImportant = false, isChoice = false) {
+function addLog(age, text, seasonLabel = "日常", isImportant = false, isChoice = false, isSub = false) {
   const timeline = document.getElementById("timeline");
   const div = document.createElement("div");
   let cls = "log-entry";
   if (isImportant) cls += " important";
   else if (isChoice) cls += " choice-log";
+  else if (isSub) cls += " sub-event";
   div.className = cls;
 
-  let badge = "";
-  if (isImportant) badge = "<span>★ 転機</span>";
-  else if (isChoice) badge = "<span>◆ 選択</span>";
+  let badge = `<span class="season-badge">${seasonLabel}</span>`;
+  if (isImportant) badge = `<span class="season-badge" style="color:#f78166;">★ 転機・${seasonLabel}</span>`;
+  else if (isChoice) badge = `<span class="season-badge" style="color:#d29922;">◆ 選択・${seasonLabel}</span>`;
 
   div.innerHTML = `
     <div class="age-label">
@@ -975,8 +1095,8 @@ function showChoice(choiceObj) {
       state.waitingChoice = false;
       document.getElementById("btn-next").disabled = false;
       opt.action(state);
-      // 選択肢のあと、同年齢のイベントも1つ走らせる（18歳は卒業イベントを必ず走らせる）
-      runEventsForCurrentAge();
+      // 選択肢のあとに、その年齢のメインイベント＆日常イベントも連続発生させる
+      runMultipleEventsForAge(state.age);
       updateStatusBar();
       if (state.age >= 18) {
         finishGame();
@@ -992,7 +1112,7 @@ function showChoice(choiceObj) {
 
 /**
  * ==========================================================
- * 5. マルチエンディング判定（全12種類）＆シェア機能
+ * 6. マルチエンディング判定（全12種類）＆シェア機能
  * ==========================================================
  */
 function finishGame() {
@@ -1004,10 +1124,9 @@ function finishGame() {
   let title = "";
   let desc = "";
 
-  // 12種類の緻密なエンディング分岐
   if (state.attendance === "separate" && state.study >= 5) {
     title = "『静かな別室から、知の頂へ』";
-    desc = "大人数の教室のペースに無理に合わせることはしなかった。けれど、静かな別室で先生たちに支えられながら積み上げた知識と思考力は、他の誰にも負けない武器になった。自分だけの時計で歩み抜いた、誇り高き18年間。";
+    desc = "大人数の教室のペースに無理に合わせることはしなかった。けれど、静かな別室で先生たちに支えられながら積み上げた知識と思考力は、他の誰にも負けない確かな武器になった。自分だけの時計で歩み抜いた、誇り高き18年間。";
   } else if (state.attendance === "separate") {
     title = "『自分だけの時計と、優しい春』";
     desc = "みんなと同じ教室、同じ歩幅で歩くことは選ばなかったけれど、自分の心を守りながら穏やかに単位を積み重ねた日々は、何よりも尊い時間だった。焦らず蓄えたエネルギーで、新しい春へ歩き出す。";
@@ -1016,7 +1135,7 @@ function finishGame() {
     desc = "昼間は物静かな一生徒、しかし深夜のモニターの前では物語を紡ぎ、コードを書き、コミュニティを動かす創造主だった。二つの世界を行き来しながら知性と創作を極めた、唯一無二の青春。";
   } else if (state.romance.status === "dating" && state.vibe >= 3) {
     title = "『王道のスポットライトの中心で』";
-    desc = `騒がしい仲間との放課後も、${state.romance.name}と手を繋いだ文化祭や花火大会も、すべてが映画のワンシーンのように眩しい18年間だった。数え切れない思い出を胸に、春からのステージへ駆け出してゆく。`;
+    desc = `騒がしい仲間との放課後も、${state.romance.name}と手を繋いだ文化祭も、すべてが映画のワンシーンのように眩しい18年間だった。数え切れない思い出を胸に、春からのステージへ駆け出してゆく。`;
   } else if (state.romance.status === "dating") {
     title = "『教室の隅で見つけた、たった一つの奇跡』";
     desc = `決してクラスの中心で目立つタイプではなかったけれど、隣にいてくれた${state.romance.name}との穏やかな時間だけは、何よりも確かな宝物だった。二人で交わした約束が、これからの未来を照らしている。`;
@@ -1034,10 +1153,10 @@ function finishGame() {
     desc = "深夜のデスクライトの下で積み重ねたノートと参考書の山は、決して自分を裏切らなかった。知ることの楽しさと圧倒的な実力を手に、さらに広い学問の海へと旅立つ。";
   } else if (state.flags.has("reunion") && state.friend.status === "active") {
     title = "『距離を超えて繋がった、ふたりの軌跡』";
-    desc = `一度は遠く離れた親友・${s_friendName()}との奇跡のような再会。どんなに環境が変わっても変わらない絆があることを知った、温かい18年間だった。`;
+    desc = `一度は遠く離れた親友・${state.friend.name}との奇跡のような再会。どんなに環境が変わっても変わらない絆があることを知った、温かい18年間だった。`;
   } else if (state.romance.status === "crush" || state.romance.status === "classmate") {
     title = "『ページに挟んだままの恋文』";
-    desc = `${state.romance.name}との何気ない会話や、少しだけ近づいた文化祭の記憶。最後まで想いを言葉にはしなかったけれど、だからこそ永遠に色褪せない、甘酸っぱく静かな青春だった。`;
+    desc = `${state.romance.name}との移動教室での会話や、少しだけ近づいた文化祭の記憶。最後まで想いを言葉にはしなかったけれど、だからこそ永遠に色褪せない、甘酸っぱく静かな青春だった。`;
   } else {
     title = "『名もなき日々の愛おしさ』";
     desc = "劇的な大事件があったわけじゃない。けれど、夕暮れの通学路の色や、イヤホンから流れていた音楽は確かにここにあった。何者でもなかった僕が、何者かになるための18年間が、今静かに幕を閉じる。";
@@ -1070,20 +1189,16 @@ function finishGame() {
   }, 100);
 }
 
-function s_friendName() {
-  return state.friend.name;
-}
-
 function copyResult() {
   const hlText = state.highlights.length > 0
     ? state.highlights.map(h => `・${h}`).join("\n")
     : "・穏やかで平穏な18年間を過ごした";
 
-  const shareText = `【18回目の春に — 青春シミュレーター】\n到達エンディング：${state.endingTitle}\n\n${hlText}\n\n#18回目の春に`;
+  const shareText = `【18回目の春に — 青春シミュレーター】\n到達エンディング：${state.endingTitle}\n\n${hlText}\n\nhttps://rotte-1225.github.io/YOUR-LIFE/\n#18回目の春に`;
   
   navigator.clipboard.writeText(shareText).then(() => {
     const btn = document.getElementById("btn-copy");
-    btn.textContent = "コピーしました！（SNSやLINEに貼れます）";
+    btn.textContent = "コピーしました！（LINEやDiscordに貼れます）";
     setTimeout(() => {
       btn.textContent = "結果をコピーしてシェアする";
     }, 3000);
@@ -1097,7 +1212,7 @@ function toggleAuto() {
     document.getElementById("btn-auto").textContent = "停止";
     autoTimer = setInterval(() => {
       if (!state.waitingChoice && !state.finished) nextYear();
-    }, 1000);
+    }, 1200);
   }
 }
 
